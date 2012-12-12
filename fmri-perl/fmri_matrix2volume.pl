@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # (c) German Gomez-Herrero, g.gomez@nin.knaw.nl
 
 # Description: Converts .matrix text files back to .nii volumes

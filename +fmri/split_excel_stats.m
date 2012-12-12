@@ -17,6 +17,9 @@ function split_excel_stats(fName, hdrRow, outFName, subjCol, varargin)
 % actual file name. The column group name is obtained by simply
 % concatenating the names of the columns included in certain column group.
 %
+% SUBJCOL is the name of the column that contains the subject IDs.
+% Typically this will be something like 'subject'
+%
 % COLGROUPi is the column group specification for the ith group. COLGROUPi
 % is either a string (if the column group contains a single column) or a
 % cell array of strings. In the latter case, the cell array contains the

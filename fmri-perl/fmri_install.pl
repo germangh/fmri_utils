@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # (c) German Gomez-Herrero, g.gomez@nin.knaw.nl
 
 # Description: Installs the FMRI module at the somerenserver
@@ -18,14 +18,14 @@ unless($conf_dir) {$conf_dir = '/etc'};
 
 # Copy module into destination directory
 my $dir_from = cwd();
-my $dir_to   = catdir($module,'FMRI');
+my $dir_to   = catdir($module,'fmri');
 dircopy($dir_from, $dir_to) or die "Copy $dir_from --> $dir_to failed: $!"; 
 print "dircopy $dir_from $dir_to\n";
-chmod (0755, catdir($module,'FMRI')) or die "Coudn't chmod $file: $!";
+chmod (0755, catdir($module,'fmri')) or die "Coudn't chmod $file: $!";
         
 # Copy scripts to the perl libraries directory and generate symbolic links to them
-foreach (qw(fmri_matrix2volume fmri_volume2matrix)){
-  my $file = catfile($module, 'FMRI', $_.'.pl');
+foreach (qw(fmri_matrix2volume fmri_volume2matrix fmri_split_excel_stats)){
+  my $file = catfile($module, 'fmri', $_.'.pl');
   copy($_.'.pl', $file) or die "Copy $_.pl -> $file failed: $!";
   print "copy $_.pl $file\n";
   chmod (0755, $file) or die "Coudn't chmod $file: $!";  
@@ -35,7 +35,7 @@ foreach (qw(fmri_matrix2volume fmri_volume2matrix)){
 }
 
 foreach (qw(fmri.ini)){
-  my $file = catfile($module, 'FMRI', $_);
+  my $file = catfile($module, 'fmri', $_);
   copy($_, $file ) or die "Copy $_ --> $file failed: $!";
   print "copy $_ $file\n";
   my $link_name = catfile($conf_dir, $_);

@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # (c) German Gomez-Herrero, g.gomez@nin.knaw.nl
 
 # Description: Uninstalls the FMRI module from the somerenserver
@@ -14,7 +14,7 @@ unless($bin_dir){$bin_dir = '/usr/local/bin';}
 unless($module) {$module = '/usr/local/lib/perl5/site_perl/5.14.1/';}
 unless($conf_dir) {$conf_dir = '/etc'};
 
-my @files = qw(fmri_volume2matrix fmri_matrix2volume);
+my @files = qw(fmri_volume2matrix fmri_matrix2volume fmri_split_excel_stats);
 my @files_bin = map {catdir($bin_dir, $_)} @files;
 my @files_module = map {catfile($module, "$_.pl")} @files;
 
@@ -29,6 +29,6 @@ foreach (qw(fmri.ini)){
   print "unlink $file\n";
 }
 # Remove the module directory
-my $dir = catdir($module, 'FMRI');
+my $dir = catdir($module, 'fmri');
 remove_tree $dir;
 print "Removed $dir\n"
