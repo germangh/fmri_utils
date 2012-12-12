@@ -1,17 +1,70 @@
 function split_excel_stats(fName, hdrRow, outFName, subjCol, varargin)
-% SPLIT_EXCEL_STATS
+% SPLIT_EXCEL_STATS - Split Excel stats into various text files
+%
+% split_excel_stats(fName, hdrRow, outFName, subjCol, colGroup1, ...
+%       colGroup2, colGroup3, ...)
+%
+% Where
+%
+% FNAME is the name of the input Excel file
+%
+% HDRROW is the index of the row in the Excel spreadsheed that corresponds
+% to the stats table header. 
+%
+% OUTFNAME is a string that specifies the naming of the generated text
+% files. The sub-strings '<?subj>' and '<?set>' will be replaced by the
+% corresponding subject ID and column group name in order to produce the
+% actual file name. The column group name is obtained by simply
+% concatenating the names of the columns included in certain column group.
+%
+% COLGROUPi is the column group specification for the ith group. COLGROUPi
+% is either a string (if the column group contains a single column) or a
+% cell array of strings. In the latter case, the cell array contains the
+% names of all the columns included in the group. For instance, use
+% COLGROUP = {'even_onset', 'odd_onset'} to generate text files that
+% contain, for a given subject, two columns. The first containing the
+% values of the even_onset stat, and the second the values for the
+% odd_onset stat.
 %
 %
-% ## Example:
+% ## Examples:
+%
+% % There is a sample Excel file included with this package. Place yourself
+% % on the directory where sub-directory +fmri is located and run:
 %
 % import fmri.split_excel_stats;
-% split_excel_stats('+fmri/+test/test.xlsx', 1, 'test_<?subj>_<?set>.txt', 'subject', ...
+% split_excel_stats('+fmri/+test/test.xlsx', 1, ...
+%   'test_<?subj>_<?set>.txt', 'subject', ...
 %   'stat1', {'stat2', 'stat3'});
 %
+% % Then inspect the generated text files to understand how this script
+% % works.
+% 
+% % The following example:
+%
 % split_excel_stats('ssmd_fmri_behav_auob.xlsx', ...
-%   3, 'ssmd_<?subj>_fmri_behav_auob_<?set>.txt', 'subject', 'even_onset', 'odd_onset', ...
-%   'even_correct_onset', 'odd_correct_onset', 'error_onset', ...
-%   'noresp_onset', 'error+noresp_onset');
+%   3, 'ssmd_<?subj>_fmri_behav_auob_<?set>.txt', 'subject', ...
+%   'even_onset', 'odd_onset', 'even_correct_onset', ...
+%   'odd_correct_onset', 'error_onset', 'noresp_onset', ...
+%   'error+noresp_onset');
+%
+% % will generate 7 text files per subject. Each of those files will
+% % contain a single column of values.
+%
+%
+% ## Notes:
+%
+%   * This script is not designed to be fast but robust. This means that
+%     it might be too slow if the input Excel file is very large. Also, the
+%     whole Excel file is read at once into the functions workspace which
+%     could produce an out-of-memory error for large files.
+%
+%   * There is a Perl interface to this script. Just open a console window
+%     and type:
+%
+%       fmri_split_excel_stats --help
+%
+%
 %
 % See also: fmri
 
