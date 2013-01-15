@@ -35,7 +35,8 @@ my $conf = new Config::IniFiles(-file => $ini);
 
 # Run the MATLAB command
 my $path = $conf->val('path', 'matlab_source');
-my $cmd = 'matlab -nosplash -nodisplay -r "addpath(genpath(\''.$path.'\'));'. 
+my $cmd = 'matlab -nosplash -nodisplay -r "addpath(genpath(\''.$path.'\'));'.
+          'fmri.initialize;'.
           'fmri.matrix2volume(\''.$folder.'\');exit;"';
 `$cmd`;
 

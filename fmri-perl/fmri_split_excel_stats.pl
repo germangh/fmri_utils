@@ -66,6 +66,7 @@ my $path = $conf->val('path', 'matlab_source');
 my $cwd = getcwd;
 my $cmd = 'matlab -nosplash -nodisplay -r "cd \''.$cwd.'\';addpath(genpath(\''.$path.'\'));'. 
           "try ".
+          'fmri.initialize;'.
 		  'fmri.split_excel_stats(\''.$fName.'\','. 
 		  ''.$hRow.',\''.$oFName.'\',\''.$sCol.'\','.$grpArgs.');'.
           "catch ME exit; end ".
