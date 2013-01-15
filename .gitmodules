@@ -1,9 +1,0 @@
-[submodule "misc"]
-	path = misc
-	url = git@github.com:germangh/matlab_misc
-[submodule "mperl"]
-	path = mperl
-	url = git@github.com:germangh/matlab_mperl
-[submodule "matlab_mjava"]
-	path = matlab_mjava
-	url = https://germangh@github.com/germangh/matlab_mjava
